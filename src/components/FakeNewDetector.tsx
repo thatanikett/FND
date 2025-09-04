@@ -84,7 +84,7 @@ const FakeNewsDetector: React.FC<FNDProps> = ({ results, setResults }) => {
       }
 
       // 4. Citation Quality
-      const hasLinks = /(https?:\/\/[^\s]+)/g.test(articleText);
+      const hasLinks = /(https?:\[\/]{2}[^\s]+)/g.test(articleText);
       const vagueSources = /sources say|experts believe|it is reported/i.test(articleText);
       if (vagueSources) {
           confidence -= 15;
@@ -278,7 +278,11 @@ const FakeNewsDetector: React.FC<FNDProps> = ({ results, setResults }) => {
 
       {isAnalyzing && (
         <div className="fnd-loader">
-          <div className="fnd-spinner"></div>
+          <div className="fnd-dots">
+          <div></div>
+          <div></div>
+          <div></div>
+          </div>
           <p>ANALYZING...</p>
         </div>
       )}
