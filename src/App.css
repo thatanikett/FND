@@ -1,0 +1,84 @@
+/* src/App.css */
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.app-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #000;
+}
+
+.background-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  display: flex;
+  align-items: center; /* Default: Vertically center the content (for the input form) */
+  justify-content: center;
+  padding: 2rem;
+  overflow-y: auto;
+  pointer-events: none;
+  transition: align-items 0.3s ease; /* Optional: Smooth transition */
+}
+
+/* This new class will be added when results are visible */
+.content.align-top {
+  align-items: flex-start; /* Override: Align content to the top (for the results) */
+}
+
+.fnd-container {
+  pointer-events: auto;
+}
+
+/* Custom Scrollbar Styling (for WebKit browsers like Chrome, Edge, Safari) */
+
+/* Target the scrollbar in the main content area and the textarea */
+.content::-webkit-scrollbar,
+.fnd-textarea::-webkit-scrollbar {
+  width: 12px; /* Width of the entire scrollbar */
+}
+
+.content::-webkit-scrollbar-track,
+.fnd-textarea::-webkit-scrollbar-track {
+  background: #1c1c1e; /* scrollbar track */
+}
+
+.content::-webkit-scrollbar-thumb,
+.fnd-textarea::-webkit-scrollbar-thumb {
+  background-color: #4a4a4a; /* Color of the scroll thumb */
+  border-radius: 20px; /* Roundness of the scroll thumb */
+  border: 3px solid #1c1c1e; /* Creates padding around the thumb */
+}
+
+.content::-webkit-scrollbar-thumb:hover,
+.fnd-textarea::-webkit-scrollbar-thumb:hover {
+  background-color: #c9ab89; /* Color of the thumb on hover - Muted Tan */
+}
+
+
+/* Styling for Firefox */
+.content,
+.fnd-textarea {
+  scrollbar-width: thin; /* Can be 'auto', 'thin', or 'none' */
+  scrollbar-color: #4a4a4a #1c1c1e; /* thumb color track color */
+}
