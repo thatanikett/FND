@@ -165,9 +165,9 @@ float onOff(float a, float b, float c)
 
 float displace(vec2 look)
 {
-    float y = look.y - mod(iTime * 0.25, 1.0);
+    float y = look.y - mod(iTime * 0.25, 1.0) * uScale;
     float window = 1.0 / (1.0 + 50.0 * y * y);
-    return sin(look.y * 20.0 + iTime) * 0.0125 * onOff(4.0, 2.0, 0.8) * (1.0 + cos(iTime * 60.0)) * window;
+    return sin(look.y * 20.0 + iTime) * 0.1 * onOff(4.0, 2.0, 0.8) * (1.0 + cos(iTime * 60.0)) * window;
 }
 
 vec3 getColor(vec2 p){
