@@ -1,13 +1,22 @@
 import { useState } from 'react';
 import FaultyTerminal from './components/FaultyTerminal';
 import FakeNewsDetector from './components/FakeNewDetector';
-// Import the AnalysisResult type from the component file
+import LandingPage from './components/LandingPage'; // Import the new component
 import type { AnalysisResult } from './components/FakeNewDetector';
 import './App.css';
 
 function App() {
   // The 'results' state is now managed by the App component
   const [results, setResults] = useState<AnalysisResult | null>(null);
+  const [showApp, setShowApp] = useState(false); // State to control which component is shown
+
+  const handleLaunchApp = () => {
+    setShowApp(true);
+  };
+
+  // Conditionally set the alignment class
+  // It should be centered for the landing page, and top-aligned for the FND results
+  const contentAlignment = !showApp || !results ? '' : 'align-top';
 
   return (
     <div className='app-container'>
@@ -33,12 +42,17 @@ function App() {
         />
       </div>
       {/* Conditionally add the 'align-top' class when 'results' is not null */}
-      <div className={`content ${results ? 'align-top' : ''}`}>
+      <div className={`content ${contentAlignment}`}>
         {/* Pass the state and the function to update it as props */}
-        <FakeNewsDetector results={results} setResults={setResults} />
+        {showApp ? (
+          <FakeNewsDetector results={results} setResults={setResults} />
+        ) : (
+          <LandingPage onLaunch={handleLaunchApp} />
+        )}
       </div>
     </div>
   );
 }
 
 export default App;
+

@@ -1,0 +1,124 @@
+:root {
+  --accent-color: #00ff41;
+  --text-primary: #e0e0e0;
+  --text-secondary: #808080;
+  --background-color: #0a0a0a;
+}
+
+.landing-container {
+  font-family: 'IBM Plex Mono', monospace;
+  color: var(--text-primary);
+  text-align: center;
+  max-width: 700px;
+  padding: 2rem;
+  pointer-events: auto;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.landing-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.landing-description {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 3rem;
+  color: var(--text-primary);
+}
+
+.launch-btn {
+  font-family: 'IBM Plex Mono', monospace;
+  background-color: transparent;
+  color: var(--accent-color);
+  border: 2px solid var(--accent-color);
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.4s ease-in-out;
+  text-shadow: 0 0 8px rgba(0, 255, 65, 0.5);
+}
+
+.launch-btn:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background-color: var(--accent-color);
+  transition: left 0.4s ease-in-out;
+  z-index: -1;
+}
+
+.launch-btn:hover {
+  color: var(--background-color);
+}
+
+.launch-btn:hover:before {
+  left: 0;
+}
+
+/* Glitch Title Effect */
+.glitch-text {
+  font-size: 5rem;
+  font-weight: 600;
+  color: var(--accent-color);
+  letter-spacing: 0.05em;
+  position: relative;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 10px rgba(0, 255, 65, 0.4);
+}
+
+.glitch-text:before,
+.glitch-text:after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--background-color);
+  overflow: hidden;
+}
+
+.glitch-text:before {
+  left: 2px;
+  text-shadow: -2px 0 #ff00c1;
+  animation: glitch-anim-1 2s infinite linear alternate-reverse;
+}
+
+.glitch-text:after {
+  left: -2px;
+  text-shadow: -2px 0 #00fff9, 2px 2px #ff00c1;
+  animation: glitch-anim-2 2s infinite linear alternate-reverse;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes glitch-anim-1 {
+  0% { clip-path: inset(15% 0 86% 0); }
+  20% { clip-path: inset(5% 0 45% 0); }
+  40% { clip-path: inset(36% 0 37% 0); }
+  60% { clip-path: inset(71% 0 11% 0); }
+  80% { clip-path: inset(93% 0 2% 0); }
+  100% { clip-path: inset(55% 0 28% 0); }
+}
+
+@keyframes glitch-anim-2 {
+  0% { clip-path: inset(82% 0 3% 0); }
+  20% { clip-path: inset(33% 0 40% 0); }
+  40% { clip-path: inset(1% 0 95% 0); }
+  60% { clip-path: inset(62% 0 14% 0); }
+  80% { clip-path: inset(9% 0 77% 0); }
+  100% { clip-path: inset(48% 0 45% 0); }
+}
