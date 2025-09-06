@@ -18,7 +18,6 @@ F.N.D. is a web-based application that analyzes news articles and text to provid
 *   **Vite:** A fast build tool for modern web development.
 *   **Tailwind CSS:** A utility-first CSS framework for rapid UI development.
 *   **OGL:** A small, effective WebGL library.
-*   **Lucide React:** A library of simply designed icons.
 
 ## Getting Started
 
