@@ -1,69 +1,77 @@
-# React + TypeScript + Vite
+# F.N.D. - Fake News Detector
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+F.N.D. is a web-based application that analyzes news articles and text to provide a credibility score. It uses a set of heuristics to identify potential fake news, propaganda, and misinformation. The application features a retro-terminal design for its user interface.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+*   **Analyze by URL:** Analyze an article by providing its URL.
+*   **Analyze by Text:** Paste the text of an article to analyze it directly.
+*   **Credibility Score:** Get a credibility score from 0 to 100.
+*   **Detailed Analysis:** See a breakdown of the analysis, including the rules that were passed or failed.
+*   **Export Report:** Download a text file of the analysis report.
+*   **Responsive Design:** The application is designed to work on different screen sizes.
 
-## Expanding the ESLint configuration
+## Technologies Used
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+*   **React:** A JavaScript library for building user interfaces.
+*   **TypeScript:** A typed superset of JavaScript that compiles to plain JavaScript.
+*   **Vite:** A fast build tool for modern web development.
+*   **Tailwind CSS:** A utility-first CSS framework for rapid UI development.
+*   **OGL:** A small, effective WebGL library.
+*   **Lucide React:** A library of simply designed icons.
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Getting Started
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+To get a local copy up and running, follow these simple steps.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Prerequisites
+
+*   [Node.js](https://nodejs.org/) (which includes npm) must be installed on your system.
+
+### Installation
+
+1.  Clone the repo:
+    ```sh
+    git clone https://github.com/thatanikett/FND.git
+    ```
+2.  Install NPM packages:
+    ```sh
+    npm install
+    ```
+3.  Start the development server:
+    ```sh
+    npm run dev
+    ```
+4.  Open your browser and navigate to `http://localhost:5173/` (or the address shown in your terminal).
+
+## Project Structure
+
+```
+/
+├── public/
+│   └── vite.svg
+├── src/
+│   ├── assets/
+│   │   └── react.svg
+│   ├── components/
+│   │   ├── FakeNewDetector.css
+│   │   ├── FakeNewDetector.tsx
+│   │   ├── FaultyTerminal.tsx
+│   │   ├── LandingPage.css
+│   │   └── LandingPage.tsx
+│   ├── lib/
+│   │   └── utils.ts
+│   ├── App.css
+│   ├── App.tsx
+│   ├── index.css
+│   └── main.tsx
+├── .gitignore
+├── index.html
+├── package.json
+├── README.md
+└── vite.config.ts
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Disclaimer
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+This application is a demonstration and should not be used to determine the credibility of real news articles. The analysis is based on a limited set of rules and does not guarantee accuracy. Always verify important claims through multiple reputable sources.
