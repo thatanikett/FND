@@ -34,7 +34,6 @@ const FakeNewsDetector: React.FC<FNDProps> = ({ results, setResults }) => {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // (The analyzeArticle function remains exactly the same as before)
   const analyzeArticle = (source: string, articleText: string): AnalysisResult => {
       let confidence = 50;
       const analysis: AnalysisItem[] = [];
@@ -42,11 +41,10 @@ const FakeNewsDetector: React.FC<FNDProps> = ({ results, setResults }) => {
       // 1. Source Credibility
       const reputableDomains = ['nytimes.com', 'bbc.com', 'reuters.com', 'apnews.com', 'wsj.com', 'theguardian.com', 'npr.org', 'indiatoday.in'];
       const suspiciousDomains = ['infowars.com', 'breitbart.com', 'dailycaller.com', 'naturalnews.com', 'worldnewsdailyreport.com', 'thegatewaypundit.com'];
-      let isReputableSource = false;
+      
       if (source !== "Pasted Text") {
           if (reputableDomains.some(d => source.includes(d))) {
               confidence += 10;
-              isReputableSource = true;
               analysis.push({ rule: 'Source Credibility', passed: true, score: '+10', reasoning: `Source domain '${source}' is on the list of reputable news outlets.` });
           } else if (suspiciousDomains.some(d => source.includes(d))) {
               confidence -= 20;
@@ -72,20 +70,9 @@ const FakeNewsDetector: React.FC<FNDProps> = ({ results, setResults }) => {
           analysis.push({ rule: 'Headline Style', passed: true, score: '+10', reasoning: 'Headline appears to be neutral and informative.' });
       }
 
-      // 3. Cross-Reference (Simulated)
-      const corroborationChance = isReputableSource ? 0.1 : 0.7;
-      const isCorroborated = Math.random() > corroborationChance;
-      if (isCorroborated) {
-          confidence += 10;
-          analysis.push({ rule: 'Cross-Reference', passed: true, score: '+10', reasoning: '(Simulated) The story appears to be reported by multiple reputable sources.' });
-      } else {
-          confidence -= 15;
-          analysis.push({ rule: 'Cross-Reference', passed: false, score: '-15', reasoning: '(Simulated) The story could not be found on other major news outlets, raising questions about its authenticity.' });
-      }
-
-      // 4. Citation Quality
-      const hasLinks = /(https?:\[\/]{2}[^\s]+)/g.test(articleText);
-      const vagueSources = /sources say|experts believe|it is reported/i.test(articleText);
+      // 3. Citation Quality - Fixed regex
+      const hasLinks = /(https?:\/\/[^\s]+)/g.test(articleText);
+      const vagueSources = /sources say|experts believe|it is reported/i.test(articleText)
       if (vagueSources) {
           confidence -= 15;
           analysis.push({ rule: 'Citation Quality', passed: false, score: '-15', reasoning: 'The article relies on vague or anonymous sources (e.g., "sources say"), which weakens its credibility.' });
@@ -96,7 +83,7 @@ const FakeNewsDetector: React.FC<FNDProps> = ({ results, setResults }) => {
            analysis.push({ rule: 'Citation Quality', passed: null, score: '±0', reasoning: 'No clear citations (links or vague phrases) were detected.' });
       }
 
-      // 5. Writing Style
+      // 4. Writing Style
       const typos = (articleText.match(/\b(teh|wierd|definately)\b/ig) || []).length;
       const excessiveCaps = (articleText.match(/\b[A-Z]{4,}\b/g) || []).length > 3;
       const excessivePunctuation = (articleText.match(/!{2,}/g) || []).length > 1;
@@ -108,7 +95,7 @@ const FakeNewsDetector: React.FC<FNDProps> = ({ results, setResults }) => {
           analysis.push({ rule: 'Writing Style', passed: true, score: '+5', reasoning: 'The writing style appears professional and adheres to standard grammatical conventions.' });
       }
 
-      // 6. Date & Context
+      // 5. Date & Context
       const hasDate = /\b(January|February|March|April|May|June|July|August|September|October|November|December)\s\d{1,2},?\s\d{4}\b/i.test(articleText);
       if(hasDate) {
           confidence += 5;
@@ -118,14 +105,15 @@ const FakeNewsDetector: React.FC<FNDProps> = ({ results, setResults }) => {
           analysis.push({ rule: 'Date & Context', passed: false, score: '-5', reasoning: 'The article lacks a clear publication date, which can be a tactic to make old news seem current.' });
       }
 
-      // 7. Emotional Language
+      // 6. Emotional Language - Fixed logic consistency
       const emotionalWords = ['outrageous', 'disgusting', 'shameful', 'corrupt', 'liar', 'idiot', 'hates'];
       const usesEmotionalLanguage = emotionalWords.some(word => articleText.toLowerCase().includes(word));
       if (usesEmotionalLanguage) {
           confidence -= 10;
           analysis.push({ rule: 'Emotional Language', passed: false, score: '-10', reasoning: 'The article uses emotionally charged or inflammatory language, common in propaganda, not objective reporting.' });
       } else {
-           analysis.push({ rule: 'Emotional Language', passed: true, score: '±0', reasoning: 'The article maintains a generally neutral tone.' });
+           analysis.push({ rule: 'Emotional Language', passed: true, score: '+5', reasoning: 'The article maintains a generally neutral tone.' });
+           confidence += 5;
       }
 
       // Final Calculation
@@ -143,7 +131,6 @@ const FakeNewsDetector: React.FC<FNDProps> = ({ results, setResults }) => {
     setError(null);
     setResults(null);
 
-    // ... (rest of validation logic is the same)
     let source = '';
     let articleText = '';
 
@@ -186,7 +173,7 @@ const FakeNewsDetector: React.FC<FNDProps> = ({ results, setResults }) => {
     setTimeout(() => {
       try {
         const analysisResults = analyzeArticle(source, articleText);
-        setResults(analysisResults); // Use the prop function to update the state in App.tsx
+        setResults(analysisResults);
       } catch (e) {
         setError("An unexpected error occurred during analysis.");
         console.error(e);
@@ -197,15 +184,13 @@ const FakeNewsDetector: React.FC<FNDProps> = ({ results, setResults }) => {
   };
 
   const handleReset = () => {
-    setResults(null); // Use the prop function
-    // Reset internal component state
+    setResults(null);
     setError(null);
     setUrlInput('');
     setTextInput('');
     setActiveTab('url');
   };
 
-  // ... (generateReportText and downloadReport are the same)
   const generateReportText = (results: AnalysisResult) => {
     let report = `F.N.D. Analysis Report\n`;
     report += `=====================================\n\n`;
@@ -213,12 +198,14 @@ const FakeNewsDetector: React.FC<FNDProps> = ({ results, setResults }) => {
     report += `Headline: ${results.headline}\n\n`;
     report += `Verdict: ${results.judgment}\n`;
     report += `Credibility Score: ${results.finalConfidence}% (${results.level})\n\n`;
-    report += `Threat Analysis Breakdown:\n`;
+    report += `Analysis Breakdown:\n`;
     report += `---------------------------\n`;
     results.analysis.forEach(item => {
         report += `\n[${item.score}] ${item.rule}:\n`;
         report += `  - ${item.reasoning}\n`;
     });
+    
+    report += `\n\nNote: This analysis is based on automated heuristics and should not be the sole factor in determining article credibility. Always verify important claims through multiple reputable sources.\n`;
     return report;
   };
 
@@ -237,7 +224,6 @@ const FakeNewsDetector: React.FC<FNDProps> = ({ results, setResults }) => {
     URL.revokeObjectURL(url);
   };
 
-  // ... (getRuleIcon and the JSX return statement are the same)
    const getRuleIcon = (passed: boolean | null) => {
     if (passed === true) {
       return <svg style={{ flexShrink: 0, marginRight: '0.75rem' }} width="24" height="24" fill="none" stroke="#4ade80" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>;
@@ -301,7 +287,7 @@ const FakeNewsDetector: React.FC<FNDProps> = ({ results, setResults }) => {
             <h2>Headline: <span>{results.headline}</span></h2>
           </div>
           <div className="fnd-threat-analysis">
-            <h3>Threat Analysis</h3>
+            <h3>Analysis Breakdown</h3>
             <div className="fnd-rule-list">
               {results.analysis.map((item, index) => {
                 const scoreColor = item.passed === true ? '#6ee7b7' : item.passed === false ? '#fca5a5' : '#d1d5db';
