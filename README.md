@@ -35,11 +35,11 @@ To get a local copy up and running, follow these simple steps.
     ```
 2.  Install NPM packages:
     ```sh
-    npm install
+    pnpm install
     ```
 3.  Start the development server:
     ```sh
-    npm run dev
+    pnpm dev
     ```
 4.  Open your browser and navigate to `http://localhost:5173/` (or the address shown in your terminal).
 
