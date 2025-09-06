@@ -1,28 +1,31 @@
-:root {
-  --accent-color: #00ff41;
-  --accent-dim: #00cc33;
-  --text-primary: #00ff41;
-  --text-secondary: #66ff66;
-  --text-dim: #44cc44;
-  --background-terminal: rgba(0, 20, 0, 0.85);
-  --border-color: #00ff41;
-  --shadow-green: rgba(0, 255, 65, 0.3);
-  --error-color: #ff0040;
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap');
+
+/* Landing Page Specific Variables - Original Enhanced Theme */
+.landing-container {
+  --landing-accent-color: #00ff41;
+  --landing-accent-dim: #00cc33;
+  --landing-text-primary: #00ff41;
+  --landing-text-secondary: #66ff66;
+  --landing-text-dim: #44cc44;
+  --landing-background-terminal: rgba(0, 20, 0, 0.85);
+  --landing-border-color: #00ff41;
+  --landing-shadow-green: rgba(0, 255, 65, 0.3);
+  --landing-error-color: #ff0040;
 }
 
 .landing-container {
   font-family: 'Courier New', 'IBM Plex Mono', monospace;
-  color: var(--text-primary);
+  color: var(--landing-text-primary);
   text-align: center;
   max-width: 800px;
   padding: 3rem 2rem;
   pointer-events: auto;
-  animation: fadeIn 2s ease-in-out;
-  background: var(--background-terminal);
-  border: 2px solid var(--border-color);
+  animation: landingFadeIn 2s ease-in-out;
+  background: var(--landing-background-terminal);
+  border: 2px solid var(--landing-border-color);
   border-radius: 8px;
   box-shadow: 
-    0 0 20px var(--shadow-green),
+    0 0 20px var(--landing-shadow-green),
     inset 0 0 20px rgba(0, 255, 65, 0.1);
   backdrop-filter: blur(5px);
   position: relative;
@@ -42,7 +45,7 @@
     rgba(0, 255, 65, 0.03),
     transparent
   );
-  animation: scanline 4s linear infinite;
+  animation: landingScanline 4s linear infinite;
   pointer-events: none;
 }
 
@@ -64,56 +67,61 @@
   pointer-events: none;
 }
 
-.terminal-header {
+.landing-container .terminal-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 2rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid var(--accent-dim);
+  border-bottom: 1px solid var(--landing-accent-dim);
   font-family: 'Courier New', monospace;
   font-size: 0.9rem;
   position: relative;
   z-index: 2;
 }
 
-.terminal-status {
-  color: var(--text-dim);
+.landing-container .terminal-status {
+  color: var(--landing-text-dim);
   display: flex;
   gap: 1rem;
 }
 
-.status-indicator {
+.landing-container .status-indicator {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
-.status-dot {
+.landing-container .status-dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--accent-color);
-  animation: pulse 2s infinite;
+  background: var(--landing-accent-color);
+  animation: landingPulse 2s infinite;
 }
 
-.glitch-text {
+.landing-container .terminal-time {
+  color: var(--landing-text-dim);
+  font-family: 'Courier New', monospace;
+}
+
+.landing-container .glitch-text {
   font-size: 4.5rem;
   font-weight: 700;
-  color: var(--accent-color);
+  color: var(--landing-accent-color);
   font-family: 'Courier New', monospace;
   letter-spacing: 0.1em;
   position: relative;
   margin-bottom: 1rem;
   text-shadow: 
-    0 0 5px var(--accent-color),
-    0 0 10px var(--accent-color),
-    0 0 15px var(--accent-color);
+    0 0 5px var(--landing-accent-color),
+    0 0 10px var(--landing-accent-color),
+    0 0 15px var(--landing-accent-color);
   z-index: 2;
 }
 
-.glitch-text:before,
-.glitch-text:after {
+.landing-container .glitch-text:before,
+.landing-container .glitch-text:after {
   content: attr(data-text);
   position: absolute;
   top: 0;
@@ -123,21 +131,21 @@
   z-index: -1;
 }
 
-.glitch-text:before {
+.landing-container .glitch-text:before {
   left: 2px;
-  color: var(--error-color);
-  animation: glitch-anim-1 3s infinite linear alternate-reverse;
+  color: var(--landing-error-color);
+  animation: landingGlitchAnim1 3s infinite linear alternate-reverse;
 }
 
-.glitch-text:after {
+.landing-container .glitch-text:after {
   left: -2px;
   color: #00fff9;
-  animation: glitch-anim-2 3s infinite linear alternate-reverse;
+  animation: landingGlitchAnim2 3s infinite linear alternate-reverse;
 }
 
-.landing-subtitle {
+.landing-container .landing-subtitle {
   font-size: 1.2rem;
-  color: var(--text-secondary);
+  color: var(--landing-text-secondary);
   margin-bottom: 2rem;
   text-transform: uppercase;
   letter-spacing: 0.15em;
@@ -147,37 +155,37 @@
   text-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
 }
 
-.landing-subtitle::before {
+.landing-container .landing-subtitle::before {
   content: '> ';
-  color: var(--accent-color);
+  color: var(--landing-accent-color);
   font-weight: bold;
 }
 
-.landing-subtitle::after {
+.landing-container .landing-subtitle::after {
   content: ' <';
-  color: var(--accent-color);
+  color: var(--landing-accent-color);
   font-weight: bold;
 }
 
-.landing-description {
+.landing-container .landing-description {
   font-size: 1.1rem;
   line-height: 1.8;
   margin-bottom: 3rem;
-  color: var(--text-secondary);
+  color: var(--landing-text-secondary);
   font-family: 'Courier New', monospace;
   text-align: left;
   background: rgba(0, 20, 0, 0.6);
   padding: 1.5rem;
-  border-left: 4px solid var(--accent-color);
+  border-left: 4px solid var(--landing-accent-color);
   border-radius: 4px;
   position: relative;
   z-index: 2;
   box-shadow: inset 0 0 10px rgba(0, 255, 65, 0.1);
 }
 
-.landing-description::before {
+.landing-container .landing-description::before {
   content: 'INFO:';
-  color: var(--accent-color);
+  color: var(--landing-accent-color);
   font-weight: bold;
   display: block;
   margin-bottom: 0.5rem;
@@ -185,11 +193,16 @@
   letter-spacing: 0.1em;
 }
 
-.launch-btn {
+.landing-container .warning-text {
+  color: var(--landing-accent-color);
+  font-weight: bold;
+}
+
+.landing-container .launch-btn {
   font-family: 'Courier New', monospace;
   background: rgba(0, 20, 0, 0.8);
-  color: var(--accent-color);
-  border: 2px solid var(--accent-color);
+  color: var(--landing-accent-color);
+  border: 2px solid var(--landing-accent-color);
   padding: 1.2rem 3rem;
   font-size: 1.2rem;
   font-weight: 700;
@@ -206,7 +219,7 @@
     inset 0 0 20px rgba(0, 255, 65, 0.1);
 }
 
-.launch-btn::before {
+.landing-container .launch-btn::before {
   content: '';
   position: absolute;
   top: 0;
@@ -216,53 +229,90 @@
   background: linear-gradient(
     90deg,
     transparent,
-    var(--accent-color),
+    var(--landing-accent-color),
     transparent
   );
   transition: left 0.5s ease-in-out;
   z-index: -1;
 }
 
-.launch-btn:hover {
+.landing-container .launch-btn:hover {
   color: #000;
-  border-color: var(--accent-color);
+  border-color: var(--landing-accent-color);
   box-shadow: 
     0 0 30px rgba(0, 255, 65, 0.6),
     inset 0 0 30px rgba(0, 255, 65, 0.2);
   transform: translateY(-2px);
 }
 
-.launch-btn:hover::before {
+.landing-container .launch-btn:hover::before {
   left: 0;
 }
 
-.launch-btn:active {
+.landing-container .launch-btn:active {
   transform: translateY(0);
 }
 
-.launch-btn-text::before {
-  content: '█ ';
-  animation: blink 1s infinite;
+.landing-container .launch-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  filter: none;
 }
 
-.terminal-prompt {
+.landing-container .launch-btn:disabled:hover {
+  color: var(--landing-accent-color);
+  transform: none;
+  box-shadow: 
+    0 0 20px rgba(0, 255, 65, 0.3),
+    inset 0 0 20px rgba(0, 255, 65, 0.1);
+}
+
+.landing-container .launch-btn:disabled:hover::before {
+  left: -100%;
+}
+
+.landing-container .launch-btn-text::before {
+  content: '█ ';
+  animation: landingBlink 1s infinite;
+}
+
+.landing-container .terminal-prompt {
   position: absolute;
   bottom: 1rem;
   left: 1.5rem;
   font-family: 'Courier New', monospace;
   font-size: 0.9rem;
-  color: var(--text-dim);
+  color: var(--landing-text-dim);
   z-index: 2;
 }
 
-.terminal-prompt::after {
+.landing-container .terminal-prompt::after {
   content: '█';
-  animation: blink 1s infinite;
+  animation: landingBlink 1s infinite;
   margin-left: 0.5rem;
 }
 
-/* Animations */
-@keyframes fadeIn {
+.landing-container .loading-dots {
+  display: inline-flex;
+  gap: 0.25rem;
+  margin-left: 0.5rem;
+}
+
+.landing-container .loading-dots span {
+  width: 4px;
+  height: 4px;
+  background-color: var(--landing-accent-color);
+  border-radius: 50%;
+  animation: landingLoadingPulse 1.4s infinite ease-in-out both;
+}
+
+.landing-container .loading-dots span:nth-child(1) { animation-delay: -0.32s; }
+.landing-container .loading-dots span:nth-child(2) { animation-delay: -0.16s; }
+.landing-container .loading-dots span:nth-child(3) { animation-delay: 0s; }
+
+/* Animations - All prefixed to avoid conflicts */
+@keyframes landingFadeIn {
   from { 
     opacity: 0; 
     transform: translateY(30px) scale(0.95); 
@@ -273,7 +323,7 @@
   }
 }
 
-@keyframes glitch-anim-1 {
+@keyframes landingGlitchAnim1 {
   0% { clip-path: inset(40% 0 61% 0); }
   20% { clip-path: inset(92% 0 1% 0); }
   40% { clip-path: inset(43% 0 1% 0); }
@@ -282,7 +332,7 @@
   100% { clip-path: inset(58% 0 43% 0); }
 }
 
-@keyframes glitch-anim-2 {
+@keyframes landingGlitchAnim2 {
   0% { clip-path: inset(25% 0 58% 0); }
   20% { clip-path: inset(54% 0 7% 0); }
   40% { clip-path: inset(58% 0 43% 0); }
@@ -291,19 +341,27 @@
   100% { clip-path: inset(43% 0 1% 0); }
 }
 
-@keyframes pulse {
+@keyframes landingPulse {
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.5; transform: scale(0.8); }
 }
 
-@keyframes blink {
+@keyframes landingBlink {
   0%, 50% { opacity: 1; }
   51%, 100% { opacity: 0; }
 }
 
-@keyframes scanline {
+@keyframes landingScanline {
   0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
   100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+@keyframes landingLoadingPulse {
+  0%, 80%, 100% { 
+    transform: scale(0);
+  } 40% { 
+    transform: scale(1.0);
+  }
 }
 
 /* Responsive Design */
@@ -313,20 +371,20 @@
     max-width: 95%;
   }
   
-  .glitch-text {
+  .landing-container .glitch-text {
     font-size: 3rem;
   }
   
-  .landing-subtitle {
+  .landing-container .landing-subtitle {
     font-size: 1rem;
   }
   
-  .landing-description {
+  .landing-container .landing-description {
     font-size: 1rem;
     text-align: center;
   }
   
-  .launch-btn {
+  .landing-container .launch-btn {
     padding: 1rem 2rem;
     font-size: 1rem;
   }

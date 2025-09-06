@@ -91,7 +91,16 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLaunch }) => {
         }}
       >
         <span className="launch-btn-text">
-          {systemStatus === 'READY' ? 'INITIALIZE PROTOCOL' : 'SYSTEM LOADING...'}
+          {systemStatus === 'READY' ? 'INITIALIZE PROTOCOL' : (
+            <>
+              SYSTEM LOADING
+              <span className="loading-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+            </>
+          )}
         </span>
       </button>
 
