@@ -35,7 +35,7 @@
   display: flex;
   align-items: center; /* Default: Vertically center the content (for the input form) */
   justify-content: center;
-  padding: 2rem;
+  padding: 1rem;
   overflow-y: auto;
   pointer-events: none;
   transition: align-items 0.3s ease; /* Optional: Smooth transition */
@@ -81,4 +81,16 @@
 .fnd-textarea {
   scrollbar-width: thin; /* Can be 'auto', 'thin', or 'none' */
   scrollbar-color: #4a4a4a #1c1c1e; /* thumb color track color */
+}
+
+@media (max-width: 768px) {
+  .content {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .content {
+    padding: 0.5rem;
+  }
 }
