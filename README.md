@@ -73,4 +73,4 @@ To get a local copy up and running, follow these simple steps.
 
 ## Disclaimer
 
-This application is a demonstration and should not be used to determine the credibility of real news articles. The analysis is based on a limited set of rules and does not guarantee accuracy. Always verify important claims through multiple reputable sources.
+This application is a demonstration and should not be used to determine the credibility of real news articles. The analysis is based on a limited set of rules and does not guarantee accuracy. Always verify important claims through multiple reputable and credible sources.
